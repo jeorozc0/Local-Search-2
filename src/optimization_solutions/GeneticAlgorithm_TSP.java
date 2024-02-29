@@ -7,6 +7,7 @@ import optimization_problems.TSP;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Implement elements that are problem specific
@@ -29,15 +30,24 @@ public class GeneticAlgorithm_TSP
 
     public Individual<Integer> reproduce(
             Individual<Integer> p1, Individual<Integer> p2) {
-        return null;
-
-        // TODO
+        List<Integer> chromosome = new ArrayList<>(p1.getChromosome());
+        int size = chromosome.size();
+        int start = new Random().nextInt(size);
+        int end = new Random().nextInt(size - start) + start;
+        for (int i = start; i <= end; i++) {
+            chromosome.set(i, p2.getChromosome().get(i));
+        }
+        return new Individual<>(chromosome, calcFitnessScore(chromosome));
 
     }
 
     public Individual<Integer> mutate(Individual<Integer> i) {
-        return null;
-        // TODO
+        List<Integer> chromosome = i.getChromosome();
+        int size = chromosome.size();
+        int i1 = new java.util.Random().nextInt(size);
+        int i2 = new java.util.Random().nextInt(size);
+        Collections.swap(chromosome, i1, i2);
+        return new Individual<>(chromosome, calcFitnessScore(chromosome));
     }
 
     public List<Individual<Integer>> generateInitPopulation(
@@ -71,8 +81,8 @@ public class GeneticAlgorithm_TSP
         Individual<Integer> best = agent.evolve(agent.generateInitPopulation(
                 POPULATION_SIZE, NUM_CITIES));
 
-        System.out.println(best);
-        System.out.println(problem.cost(best.getChromosome()));
+        System.out.println("This is the best " + best);
+        System.out.println("This is the cost " + problem.cost(best.getChromosome()));
     }
 
 }

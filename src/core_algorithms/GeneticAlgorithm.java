@@ -73,6 +73,7 @@ public abstract class GeneticAlgorithm<G> {
         for (int i = 0; i < sumofValues.size(); i++) {
             if (random <= sumofValues.get(i)) {
                 parent = population.get(i);
+                break;
             }
 
         }
@@ -98,12 +99,10 @@ public abstract class GeneticAlgorithm<G> {
     public Individual<G> selectAParent(
             List<Individual<G>> population, Individual<G> p) {
         Individual<G> originalP = selectAParent(population);
-        while (!originalP.equals(p)) {
+        while (originalP.equals(p)) {
             originalP = selectAParent(population);
         }
         return originalP;
-
-        // TODO
     }
 
 }
