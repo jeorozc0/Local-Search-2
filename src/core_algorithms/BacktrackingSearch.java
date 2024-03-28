@@ -69,7 +69,28 @@ public abstract class BacktrackingSearch <X, V> {
      * @return false if consistency could not be maintained, true otherwise
      */
     public boolean AC3(Queue<Arc<X>> arcs){
-        //TODO
+        while (!arcs.isEmpty()) {
+            Arc<X> arc = arcs.poll();
+            X head = arc.head();
+            X tail = arc.tail();
+
+            if (revise(head, tail)) {
+                // If revise for this head/tail returns true
+                // (Meaning the domain of the head variable was changed)
+                if (allVariables.get(head).domain().isEmpty()) {
+                    // If the domain becomes empty, return false
+                    return false;
+                }
+                // Add arcs to the queue for the neighbors of the head variable
+                for (X neighbor : problem.getNeighborsOf(head)) {
+                    // Skip tail variable
+                    if (!neighbor.equals(tail)) {
+                        arcs.add(new Arc<>(neighbor, head));
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -78,7 +99,7 @@ public abstract class BacktrackingSearch <X, V> {
      * @return
      */
     public boolean initAC3(){
-        //TODO: create a queue that contains all the arcs; call AC3() with this queue.
+        // Creates a queue that contains all the arcs; call AC3() with this queue.
         Queue<Arc<X>> arcs = new LinkedList<>();
         for(X v : allVariables.keySet()){
             for(X n : problem.getNeighborsOf(v)){
@@ -98,7 +119,7 @@ public abstract class BacktrackingSearch <X, V> {
             return true;
         }
         assigned.add(n);
-       // System.out.println(n+", "+assigned.size());
+        System.out.println(n+", "+assigned.size());
         while(!allVariables.get(n).domain().isEmpty()) {
             //select a value to be assigned to this variable
             V value = allVariables.get(n).domain().remove(0);
@@ -118,11 +139,11 @@ public abstract class BacktrackingSearch <X, V> {
             if (AC3(arcs) && search()) {
                 return true;
             } else {
-                //System.out.println(n+" reverting");
+                System.out.println(n+" reverting");
                 revert(allVariablesClone);
             }
         }
-       // System.out.println(n+" failed");
+        System.out.println(n+" failed");
         assigned.remove(n);
         return false;
     }

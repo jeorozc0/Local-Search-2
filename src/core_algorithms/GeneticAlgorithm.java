@@ -67,7 +67,6 @@ public abstract class GeneticAlgorithm<G> {
         for (int i = 0; i < population.size(); i++) {
             cumulativeSum += population.get(i).getFitnessScore();
             sumofValues.add(cumulativeSum);
-
         }
         Double random = new Random().nextDouble(cumulativeSum);
         for (int i = 0; i < sumofValues.size(); i++) {
@@ -78,21 +77,6 @@ public abstract class GeneticAlgorithm<G> {
 
         }
         return parent;
-
-        // for (int i = 0; i < k; i++) {
-        // Individual<G> participant = population.get(new
-        // Random().nextInt(population.size()));
-        // if(!individuals.contains(participant)){
-        // individuals.add(participant);
-
-        // }
-        // }
-        // for (int i = 0; i< individuals.size(); i++){
-        // sumofValues.add(individuals.get(i).getFitnessScore());
-        // }
-        // Collections.max(sumofValues);
-
-        // TODO
     }
 
     // optional, select a parent that's not p.
