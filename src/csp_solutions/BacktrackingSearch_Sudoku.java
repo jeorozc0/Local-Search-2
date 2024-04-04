@@ -20,6 +20,7 @@ public class BacktrackingSearch_Sudoku extends BacktrackingSearch<String,Integer
      */
     public boolean revise(String head, String tail) {
         //TODO
+        return false;
     }
 
     /**
@@ -29,6 +30,7 @@ public class BacktrackingSearch_Sudoku extends BacktrackingSearch<String,Integer
      */
     public String selectUnassigned(){
         //TODO
+        return null;
     }
 
     /**

@@ -70,6 +70,7 @@ public abstract class BacktrackingSearch <X, V> {
      */
     public boolean AC3(Queue<Arc<X>> arcs){
         //TODO
+        return true;
     }
 
     /**
