@@ -73,7 +73,7 @@ public class GeneticAlgorithm_TSP extends GeneticAlgorithm<Integer> {
         int MAX_GEN = 200;
         double MUTATION_RATE = 0.05;
         int POPULATION_SIZE = 1000;
-        int NUM_CITIES = 6; // choose from 5, 6, 17, 26
+        int NUM_CITIES = 26; // choose from 5, 6, 17, 26
         double ELITISM = 0.2;
 
         TSP problem = new TSP(NUM_CITIES);
